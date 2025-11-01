@@ -10,6 +10,8 @@ int main() {
     const int DISTANCIA_CURTA = 5; 
     // Define a distância do movimento para a Rainha (8 casas).
     const int DISTANCIA_LONGA = 8;
+    // Define o número total de movimentos 'L' que o Cavalo fará.
+    const int MOVIMENTOS_L_TOTAIS = 3; 
     
     
     // =========================================================
@@ -22,10 +24,7 @@ int main() {
     printf("Distancia: %d casas na diagonal superior direita.\n", DISTANCIA_CURTA);
     printf("==================================================\n");
     
-    // O loop 'for' é a escolha ideal quando o número de iterações é fixo (5).
-    // 1. Inicializa o contador de casas (i = 1).
-    // 2. Condição de paragem (continua até i ser <= 5).
-    // 3. Incremento (move uma casa a cada repetição).
+    // O loop 'for' é a escolha ideal quando o número de iterações é fixo (5).
     for (int casa_atual = 1; casa_atual <= DISTANCIA_CURTA; casa_atual++) {
         // Para simular a diagonal, combinamos as duas direções básicas.
         printf("Casa %d: Cima e Direita\n", casa_atual); 
@@ -48,8 +47,7 @@ int main() {
     printf("Distancia: %d casas para a direita.\n", DISTANCIA_CURTA);
     printf("==================================================\n");
     
-    // O loop 'while' executa enquanto a condição for verdadeira.
-    // Continua enquanto houver casas para percorrer (casas_restantes > 0).
+    // O loop 'while' executa enquanto a condição for verdadeira.
     while (casas_restantes_torre > 0) {
         // Incrementa o contador de casas percorridas.
         casas_percorridas_torre++; 
@@ -78,7 +76,7 @@ int main() {
     printf("Distancia: %d casas para a esquerda.\n", DISTANCIA_LONGA);
     printf("==================================================\n");
     
-    // O loop 'do-while' garante que o código no 'do' é executado pelo menos uma vez.
+    // O loop 'do-while' garante que o código no 'do' é executado pelo menos uma vez.
     do {
         // 1. Incrementa o índice para exibir a casa atual (1, 2, 3...).
         indice_movimento_rainha++;
@@ -90,6 +88,40 @@ int main() {
         contador_rainha--;
         
     } while (contador_rainha > 0); // Condição: repete enquanto o contador for positivo.
+    
+    
+    // =========================================================
+    // SIMULAÇÃO 4: MOVIMENTO DO CAVALO (Nível Aventureiro)
+    // Requisito: Movimento em "L" (2 para baixo, 1 para a esquerda),
+    // usando WHILE e FOR aninhados.
+    // =========================================================
+    
+    int movimentos_l_feitos = 0; // Contador para o loop WHILE (movimentos totais).
+    
+    printf("\n"); // Separador para clareza
+    printf("==================================================\n");
+    printf("SIMULACAO 4: MOVIMENTO DO CAVALO (WHILE e FOR)\n");
+    printf("Padrao: %d movimentos 'L' (2 p/ Baixo, 1 p/ Esquerda)\n", MOVIMENTOS_L_TOTAIS);
+    printf("==================================================\n");
+    
+    // Loop WHILE (Estrutura Externa): Controla o número total de movimentos "L" (3 vezes).
+    while (movimentos_l_feitos < MOVIMENTOS_L_TOTAIS) {
+        
+        // Bloco para iniciar a contagem do movimento 'L' atual.
+        printf("-- INICIO do Movimento L #%d --\n", movimentos_l_feitos + 1);
+        
+        // Loop FOR (Estrutura Interna): Simula as 2 casas para baixo (contagem fixa).
+        for (int passo = 1; passo <= 2; passo++) {
+            printf("  Passo %d: Baixo\n", passo); // Movimento vertical (fixo: 2 passos)
+        }
+        
+        // Imprime o movimento horizontal, completando o 'L'.
+        printf("  Passo 3: Esquerda\n"); 
+        
+        // Atualiza a condição do loop WHILE: incrementa o número de movimentos 'L' feitos.
+        movimentos_l_feitos++; 
+        printf("-- FIM do Movimento L #%d --\n\n", movimentos_l_feitos);
+    }
     
     return 0; // Indica que o programa terminou com sucesso.
 }
