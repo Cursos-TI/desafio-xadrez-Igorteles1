@@ -1,91 +1,95 @@
 #include <stdio.h>
 
-// Função principal onde o programa começa a sua execução.
+// Função principal: o ponto de entrada da execução do programa.
 int main() {
     
     // =========================================================
-    // SIMULAÇÃO 1: MOVIMENTO DA TORRE (Uso do FOR)
-    // Movimento: 5 casas para a direita (Linha Reta Horizontal).
+    // Requisito: Entrada de Dados (Uso de Constantes)
+    // =========================================================
+    // Define a distância do movimento para o Bispo e a Torre (5 casas).
+    const int DISTANCIA_CURTA = 5; 
+    // Define a distância do movimento para a Rainha (8 casas).
+    const int DISTANCIA_LONGA = 8;
+    
+    
+    // =========================================================
+    // SIMULAÇÃO 1: MOVIMENTO DO BISPO (Usando FOR)
+    // Requisito: 5 casas na diagonal superior direita (Cima + Direita).
     // =========================================================
     
-    // Constante que define a distância total do movimento.
-    const int CASAS_TORRE = 5; 
+    printf("==================================================\n");
+    printf("SIMULACAO 1: MOVIMENTO DO BISPO (FOR)\n");
+    printf("Distancia: %d casas na diagonal superior direita.\n", DISTANCIA_CURTA);
+    printf("==================================================\n");
     
-    printf("=========================================\n");
-    printf("MOVIMENTO DA TORRE (Usando FOR)\n");
-    printf("Direcao: %d casas para a Direita\n", CASAS_TORRE);
-    printf("=========================================\n");
-    
-    // O loop 'for' é ideal quando o número de repetições é conhecido antecipadamente.
-    // i = 1: Começa na casa 1
-    // i <= CASAS_TORRE: Continua até atingir 5 casas.
-    // i++: Aumenta a contagem de casas a cada volta.
-    for (int i = 1; i <= CASAS_TORRE; i++) {
-        // A cada repetição, a Torre move-se uma casa para a direita.
-        printf("Casa %d: Direita\n", i); 
+    // O loop 'for' é a escolha ideal quando o número de iterações é fixo (5).
+    // 1. Inicializa o contador de casas (i = 1).
+    // 2. Condição de paragem (continua até i ser <= 5).
+    // 3. Incremento (move uma casa a cada repetição).
+    for (int casa_atual = 1; casa_atual <= DISTANCIA_CURTA; casa_atual++) {
+        // Para simular a diagonal, combinamos as duas direções básicas.
+        printf("Casa %d: Cima e Direita\n", casa_atual); 
     }
     
-    printf("\n"); // Adiciona uma linha de separação
+    printf("\n"); // Separador para clareza
     
     
     // =========================================================
-    // SIMULAÇÃO 2: MOVIMENTO DO BISPO (Uso do WHILE)
-    // Movimento: 5 casas na Diagonal (Cima e Direita).
+    // SIMULAÇÃO 2: MOVIMENTO DA TORRE (Usando WHILE)
+    // Requisito: 5 casas para a direita (Linha Reta Horizontal).
     // =========================================================
     
-    // Variável que guarda o número de casas a mover.
-    int casas_bispo = 5; 
-    // Variável para contar quantas casas já movemos.
-    int contador_bispo = 0; 
+    // Variável de controle para o loop 'while'.
+    int casas_restantes_torre = DISTANCIA_CURTA; 
+    int casas_percorridas_torre = 0; // Conta as casas que já movemos.
     
-    printf("=========================================\n");
-    printf("MOVIMENTO DO BISPO (Usando WHILE)\n");
-    printf("Direcao: %d casas na Diagonal (Cima e Direita)\n", casas_bispo);
-    printf("=========================================\n");
+    printf("==================================================\n");
+    printf("SIMULACAO 2: MOVIMENTO DA TORRE (WHILE)\n");
+    printf("Distancia: %d casas para a direita.\n", DISTANCIA_CURTA);
+    printf("==================================================\n");
     
-    // O loop 'while' continua a executar enquanto a condição for VERDADEIRA.
-    // Aqui, ele continua enquanto o contador não atingir o limite de casas.
-    while (contador_bispo < casas_bispo) {
-        // Aumenta o contador (move o Bispo para a próxima casa).
-        contador_bispo++; 
+    // O loop 'while' executa enquanto a condição for verdadeira.
+    // Continua enquanto houver casas para percorrer (casas_restantes > 0).
+    while (casas_restantes_torre > 0) {
+        // Incrementa o contador de casas percorridas.
+        casas_percorridas_torre++; 
         
-        // O Bispo move-se na diagonal, o que é a combinação de duas direções.
-        printf("Casa %d: Cima, Direita\n", contador_bispo);
+        printf("Casa %d: Direita\n", casas_percorridas_torre);
         
-        // Nota: O WHILE é ideal quando a condição de paragem pode não ser baseada
-        // num número fixo de iterações, mas sim num estado (embora aqui o usemos
-        // para contagem, é bom para mostrar a sua flexibilidade).
+        // Atualiza a condição: decrementa as casas restantes para evitar um loop infinito.
+        casas_restantes_torre--;
     }
     
-    printf("\n"); // Adiciona uma linha de separação
+    printf("\n"); // Separador para clareza
     
     
     // =========================================================
-    // SIMULAÇÃO 3: MOVIMENTO DA RAINHA (Uso do DO-WHILE)
-    // Movimento: 8 casas para a Esquerda (Linha Reta).
+    // SIMULAÇÃO 3: MOVIMENTO DA RAINHA (Usando DO-WHILE)
+    // Requisito: 8 casas para a esquerda (Linha Reta Horizontal).
     // =========================================================
     
-    // Variável que define o número total de movimentos.
-    const int CASAS_RAINHA = 8; 
-    // Variável que será decrementada em cada repetição (inicia em 8).
-    int contador_rainha = CASAS_RAINHA; 
+    // Variável de controle que inicia com a distância total (8).
+    int contador_rainha = DISTANCIA_LONGA; 
+    // Variável para rastrear o número da casa atual (inicia em 0).
+    int indice_movimento_rainha = 0; 
     
-    printf("=========================================\n");
-    printf("MOVIMENTO DA RAINHA (Usando DO-WHILE)\n");
-    printf("Direcao: %d casas para a Esquerda\n", CASAS_RAINHA);
-    printf("=========================================\n");
+    printf("==================================================\n");
+    printf("SIMULACAO 3: MOVIMENTO DA RAINHA (DO-WHILE)\n");
+    printf("Distancia: %d casas para a esquerda.\n", DISTANCIA_LONGA);
+    printf("==================================================\n");
     
-    // O loop 'do-while' garante que o código dentro do 'do' é executado
-    // PELO MENOS UMA VEZ, antes da condição do 'while' ser testada.
+    // O loop 'do-while' garante que o código no 'do' é executado pelo menos uma vez.
     do {
-        // 1. Imprime a direção e o número da casa (8, 7, 6...).
-        printf("Casa %d: Esquerda\n", (CASAS_RAINHA - contador_rainha) + 1);
+        // 1. Incrementa o índice para exibir a casa atual (1, 2, 3...).
+        indice_movimento_rainha++;
         
-        // 2. Decrementa o contador, aproximando-o de 0.
+        // 2. Imprime a direção do movimento.
+        printf("Casa %d: Esquerda\n", indice_movimento_rainha);
+        
+        // 3. Decrementa o contador, aproximando-o de zero.
         contador_rainha--;
         
-    } while (contador_rainha > 0); // O loop continua enquanto ainda houver casas a percorrer.
+    } while (contador_rainha > 0); // Condição: repete enquanto o contador for positivo.
     
-    // Retorna 0 para indicar que o programa terminou com sucesso.
-    return 0;
+    return 0; // Indica que o programa terminou com sucesso.
 }
